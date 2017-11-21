@@ -14,13 +14,14 @@ int main(){
 
   int forky = fork();
   
-  if (forky) {
+  if (forky){
     close(fds[READ]);
     int org = 1020;
     printf("[parent] sending: %d\n", org);
     write(fds[WRITE], &org, 4);
   }
-  else {
+  
+  else{
     close(fds[WRITE]);
     int new;
     read(fds[READ], &new, 4);
@@ -30,7 +31,7 @@ int main(){
     close(fds2[READ]);
     write(fds2[WRITE], &new, 4);
   }
-  
+
   if (forky){
     close(fds2[WRITE]);
     int new;
